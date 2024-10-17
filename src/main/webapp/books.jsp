@@ -16,7 +16,7 @@
 		<%@ include file = "menu.jsp" %>
 		<div class ="p-5 mb-4 bg-body-tertiary rounded-3">
 			<div class="container-fluid py-5">
-				<h1 class ="display-5 fw-bold">도서목록</h1>
+				<h1 class ="display-5 fw-bold">도서 목록</h1>
 				<p class="col-md8 fs-4"> BookList</p>
 			</div>
 		</div>
