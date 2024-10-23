@@ -41,6 +41,7 @@
 				<h4><%=book.getUnitPrice() %>원</h4>
 				
 				<form action="books" name="addForm" method="post">
+					<input type="hidden" name="id" value="<%= book.getBookId() %>">
 					<p><a href="#" class="btn btn-info" id="order">도서주문 &raquo;</a>
 					<a href="./cart.jsp" class="btn btn-warning">장바구니 &raquo;</a>
 					<a href="books" class="btn btn-secondary">도서 목록 &raquo;</a>

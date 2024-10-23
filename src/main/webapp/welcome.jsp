@@ -29,12 +29,12 @@
 	
 		
 		<% 
-			response.setIntHeader("Refresh", 1);
+			response.setIntHeader("Refresh", 60);
 			Date day = new java.util.Date();
 			String am_pm;
 			int hour = day.getHours();
 			int minute = day.getMinutes();
-			int second = day.getSeconds();
+			//int second = day.getSeconds();
 			if(hour / 12 ==0)
 			{
 				am_pm = "AM";
@@ -45,7 +45,7 @@
 				hour = hour-12;
 			}
 			
-			String CT=hour + ":" + minute + ":" + second + " " + am_pm;
+			String CT=hour + ":" + minute + " " + am_pm;
 			out.println("현재 접속 시각 : " + CT + "\n");
 		%>
 	

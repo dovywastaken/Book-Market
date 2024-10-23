@@ -11,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/books") //menu.jsp에 있는 a태그와 연결되어 해당 a태그를 누르면 이 서블릿이 실행됨
 public class bookController1 extends HttpServlet
@@ -23,7 +24,7 @@ public class bookController1 extends HttpServlet
 		ArrayList<Book> list = bookRepository.getAllBooks();
 		//메서드 반환값이 여러개의 객체 Book 이기 때문에 ArrayList를 사용하는데 이 변수에 담을 객체의 종류를 Book으로 제한하기 위해 <Book>을 적는
 		req.setAttribute("booklist", list);
-		
+
 		RequestDispatcher rd = req.getRequestDispatcher("books.jsp");
 		rd.forward(req, resp);
 	}
@@ -31,9 +32,70 @@ public class bookController1 extends HttpServlet
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
 	{
-		String parametre = req.getParameter("id");
-		System.out.println("book.jsp 에서 컨트롤러로 넘어옴 / " + parametre);
+		String id = req.getParameter("id");
+		System.out.println("book.jsp 에서 컨트롤러로 넘어옴 / " + id);
+
 		
+		if (id == null || id.trim().equals("")) {
+			resp.sendRedirect("books.jsp");
+			return;
+		}
+
+		BookRepository dao = BookRepository.getInstance();
+		Book book = dao.getBookById(id);
+
+		if (book == null) {
+			resp.sendRedirect("exceptionNoBookId.jsp");
+			return;
+		}
+
+		ArrayList<Book> goodsList = dao.getAllBooks();
+		Book goods = new Book();
+		for(int i=0; i<goodsList.size(); i++) 
+		{
+			goods = goodsList.get(i);
+			if(goods.getBookId().equals(id)) 
+			{
+				break;
+			}
+		}
+		
+		HttpSession session = req.getSession();
+		ArrayList<Book> list = (ArrayList<Book>)session.getAttribute("cartlist");
+		if (list == null) 
+		{
+			list = new ArrayList<Book>();
+			session.setAttribute("cartlist", list);
+		}
+		
+		int cnt=0;
+		Book goodsQnt = new Book();
+		
+		
+		for(int i = 0; i<list.size(); i++) 
+		{
+			goodsQnt = list.get(i);
+			if(goodsQnt.getBookId().equals(id)) 
+			{
+				cnt++;
+				int orderQuantity = goodsQnt.getQuantity() + 1;
+				goodsQnt.setQuantity(orderQuantity);
+			}
+		}
+		
+		if(cnt == 0) 
+		{
+			goods.setQuantity(1);
+			list.add(goods);
+		}
+
+		System.out.println("Updated cart list:");
+		for (Book item : list) {
+		    System.out.println(item);
+		}
+		
+		
+		resp.sendRedirect("books");
 	}
 
 }
