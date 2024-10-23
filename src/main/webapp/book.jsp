@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import ="dto.Book" %>
+<%@ page errorPage = "exceptionNoBookId.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +36,7 @@
 				<p><b>저자</b> :<%=book.getAuthor() %>
 				<p><b>출판사</b> : <%=book.getPublisher() %>
 				<p><b>출판일</b> : <%=book.getReleaseDate() %>
-				<p><b>분류</b> :  <%=book.getCategory() %>
+				<p><b>분류</b> :  <%=book.getCategory() %>Boo
 				<p><b>재고수</b> : <%=book.getUnitsInStock() %>
 				<h4><%=book.getUnitPrice() %>원</h4>
 				
