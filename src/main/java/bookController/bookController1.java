@@ -31,7 +31,9 @@ public class bookController1 extends HttpServlet
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
 	{
-
+		String parametre = req.getParameter("id");
+		System.out.println("book.jsp 에서 컨트롤러로 넘어옴 / " + parametre);
+		
 	}
 
 }

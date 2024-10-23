@@ -20,7 +20,6 @@
 			</div>
 		</div>
 		
-	
 		<%
 			Book book = (Book)request.getAttribute("book");
 		%>
@@ -39,11 +38,36 @@
 				<p><b>분류</b> :  <%=book.getCategory() %>
 				<p><b>재고수</b> : <%=book.getUnitsInStock() %>
 				<h4><%=book.getUnitPrice() %>원</h4>
-				<p><a href="#" class="btn btn-info">도서주문 &raquo;</a>
-				<a href="books" class="btn btn-secondary">도서 목록 &raquo;</a>
+				
+				<form action="books" name="addForm" method="post">
+					<p><a href="#" class="btn btn-info" id="order">도서주문 &raquo;</a>
+					<a href="./cart.jsp" class="btn btn-warning">장바구니 &raquo;</a>
+					<a href="books" class="btn btn-secondary">도서 목록 &raquo;</a>
+				</form>
+				
 			</div>
 		</div>
 		<jsp:include page = "footer.jsp" />
 	</div>
+	
+	<script type = "text/javascript">
+		
+		var order = document.querySelector("#order");
+		
+		order.addEventListener("click", addToCart)
+	
+		function addToCart()
+		{
+			if(confirm("도서를 장바구니에 추가하시겠습니까?"))
+			{
+				document.addForm.submit();
+			}
+			else
+			{
+				document.addForm.reset();
+			}
+		}
+	</script>
+
 </body>
 </html>
