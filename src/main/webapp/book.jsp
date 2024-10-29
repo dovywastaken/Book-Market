@@ -36,9 +36,12 @@
 				<p><b>저자</b> :<%=book.getAuthor() %>
 				<p><b>출판사</b> : <%=book.getPublisher() %>
 				<p><b>출판일</b> : <%=book.getReleaseDate() %>
-				<p><b>분류</b> :  <%=book.getCategory() %>Boo
+				<p><b>분류</b> :  <%=book.getCategory() %>
 				<p><b>재고수</b> : <%=book.getUnitsInStock() %>
 				<h4><%=book.getUnitPrice() %>원</h4>
+				
+				
+				
 				
 				<form action="books" name="addForm" method="post">
 					<input type="hidden" name="id" value="<%= book.getBookId() %>">
@@ -53,20 +56,19 @@
 	</div>
 	
 	<script type = "text/javascript">
-		
+	//도서주문 버튼 order로 매핑하고 클릭 이벤트로 함수 addToCart() 호출하는 이벤트 부여
 		var order = document.querySelector("#order");
-		
 		order.addEventListener("click", addToCart)
 	
 		function addToCart()
 		{
 			if(confirm("도서를 장바구니에 추가하시겠습니까?"))
 			{
-				document.addForm.submit();
+				document.addForm.submit(); //addForm이라는 폼을 서버로 post방식으로 전달함
 			}
 			else
 			{
-				document.addForm.reset();
+				document.addForm.reset(); //addForm에 입력된 값을 초기화 함
 			}
 		}
 	</script>

@@ -24,7 +24,7 @@ public class LogFileFilter implements Filter
 	{
 		String filename = config.getInitParameter("filename");
 		
-		if(filename == null) throw new ServletException("로그 파일의 일믕르 찾을 수 없습니다."); 
+		if(filename == null) throw new ServletException("로그 파일의 이름을 찾을 수 없습니다."); 
 		try
 		{
 			writer = new PrintWriter(new FileWriter(filename, true), true);
@@ -39,7 +39,7 @@ public class LogFileFilter implements Filter
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException 
 	{
-		writer.println("접속한 클라이언 IP : " + req.getRemoteAddr());
+		writer.println("접속한 클라이언트 IP : " + req.getRemoteAddr());
 		long start = System.currentTimeMillis();
 		writer.println("접근한 URL 경로 : " + getURLPath(req));
 		writer.println("요청 처리 시작 시각 : " + getCurrentTime());

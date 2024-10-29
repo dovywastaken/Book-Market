@@ -32,15 +32,20 @@ public class bookController1 extends HttpServlet
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
 	{
+		
+		//전처리
 		String id = req.getParameter("id");
 		System.out.println("book.jsp 에서 컨트롤러로 넘어옴 / " + id);
 
 		
-		if (id == null || id.trim().equals("")) {
+		if (id == null || id.trim().equals("")) 
+		{
 			resp.sendRedirect("books.jsp");
 			return;
 		}
 
+		
+		//모델이동
 		BookRepository dao = BookRepository.getInstance();
 		Book book = dao.getBookById(id);
 
@@ -87,15 +92,11 @@ public class bookController1 extends HttpServlet
 		{
 			goods.setQuantity(1);
 			list.add(goods);
-		}
-
-		System.out.println("Updated cart list:");
-		for (Book item : list) {
-		    System.out.println(item);
-		}
+		}		
 		
 		
-		resp.sendRedirect("books");
+		//이동
+		resp.sendRedirect("cart.jsp");
 	}
 
 }

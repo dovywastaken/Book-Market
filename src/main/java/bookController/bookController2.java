@@ -62,9 +62,9 @@ public class bookController2 extends HttpServlet
 		System.out.println(unitPrice);
 		String author = multi.getParameter("author");
 		System.out.println(author);
-		String publisher = multi.getParameter("publisher");
+		String publisher = multi.getParameter("publisher"); //출판사
 		System.out.println(publisher);
-		String releaseDate = multi.getParameter("releaseDate");
+		String releaseDate = multi.getParameter("releaseDate"); //출판일
 		System.out.println(releaseDate);
 		String description = multi.getParameter("description");
 		System.out.println(description);
@@ -98,7 +98,9 @@ public class bookController2 extends HttpServlet
 		{
 		    stock = Long.valueOf(unitInStock);
 		}
-
+		
+		
+		//모델 이동
 		
 		BookRepository dao = BookRepository.getInstance();
 		
@@ -108,7 +110,7 @@ public class bookController2 extends HttpServlet
 		newBook.setUnitPrice(price);
 		newBook.setAuthor(author);
 		newBook.setPublisher(publisher);
-		newBook.setPublisher(releaseDate);
+		newBook.setReleaseDate(releaseDate);
 		newBook.setDescription(description);
 		newBook.setCategory(category);
 		newBook.setUnitsInStock(stock);
@@ -118,18 +120,12 @@ public class bookController2 extends HttpServlet
 		dao.addBook(newBook);
 		
 		ArrayList<Book> list = dao.getAllBooks();
-		
-		 HttpSession session = req.getSession();
-		 session.setAttribute("booklist", list);
-		//메서드 반환값이 여러개의 객체 Book 이기 때문에 ArrayList를 사용하는데 이 변수에 담을 객체의 종류를 Book으로 제한하기 위해 <Book>을 적는
-		
-		//모델 이동
-
+		//메서드 반환값이 여러개의 객체 Book 이기 때문에 ArrayList를 사용하는데 이 변수에 담을 객체의 종류를 Book으로 제한하기 위해 <Book>을 적는다
 		
 		//이동
-
-
-		 resp.sendRedirect("books.jsp");
+		 HttpSession session = req.getSession();
+		 session.setAttribute("booklist", list);
+		 //resp.sendRedirect("cart.jsp");
 		
 	}
 }

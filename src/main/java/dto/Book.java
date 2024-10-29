@@ -20,7 +20,7 @@ public class Book   implements Serializable
 	private String releaseDate;
 	private String condition;
 	private String filename;
-	private int quantity;
+	private int quantity; //13장에서 추가됨
 	
 	
 	
@@ -39,10 +39,6 @@ public class Book   implements Serializable
 		this.unitPrice = unitPrice;
 	}
 
-	
-	
-	
-	
 	//getter setter 함수들
 	//getter는 return타입 존재, setter는 void 처리가 기본적인 세팅
 	
@@ -133,6 +129,8 @@ public class Book   implements Serializable
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
+	
+	//13장에서 추가된 게터/세터
 	
 	public int getQuantity() {
 		return quantity;
