@@ -54,33 +54,33 @@ public class bookController1 extends HttpServlet
 			return;
 		}
 
-		ArrayList<Book> goodsList = dao.getAllBooks();
-		Book goods = new Book();
+		ArrayList<Book> goodsList = dao.getAllBooks(); //dao에 있는 모든 책 다가져와서 ArrayList에 집어넣기
+		Book goods = new Book(); //dto 생성
 		for(int i=0; i<goodsList.size(); i++) 
 		{
 			goods = goodsList.get(i);
-			if(goods.getBookId().equals(id)) 
+			if(goods.getBookId().equals(id))  //book.jsp에서 주문하기 버튼을 눌려서 가져온 bookId가 dao 안에있는 책이랑 같은지 아닌지
 			{
-				break;
+				break; //같은걸 찾으면 같은 id를 가진 dto가 goods 변수에 들어감
 			}
 		}
 		
-		HttpSession session = req.getSession();
-		ArrayList<Book> list = (ArrayList<Book>)session.getAttribute("cartlist");
-		if (list == null) 
+		HttpSession session = req.getSession(); //세션 객체 생성
+		ArrayList<Book> list = (ArrayList<Book>)session.getAttribute("cartlist"); //또 다른 ArrayList에 cartlist라는 데이터를 세션에서 가져오는데
+		if (list == null)  //만약 세션에서 가져온 값이 없으면
 		{
-			list = new ArrayList<Book>();
-			session.setAttribute("cartlist", list);
+			list = new ArrayList<Book>(); //새로 ArrayList 만들어서 list에 넣고
+			session.setAttribute("cartlist", list); //방금 만든 list를 세션에 carlist라는 이름으로 저장한다
 		}
 		
-		int cnt=0;
-		Book goodsQnt = new Book();
+		int cnt=0; //카운트 변수 초기화
+		Book goodsQnt = new Book(); //새로운 dto 생성해서 goodsQnt에 저장
 		
 		
 		for(int i = 0; i<list.size(); i++) 
 		{
 			goodsQnt = list.get(i);
-			if(goodsQnt.getBookId().equals(id)) 
+			if(goodsQnt.getBookId().equals(id))
 			{
 				cnt++;
 				int orderQuantity = goodsQnt.getQuantity() + 1;

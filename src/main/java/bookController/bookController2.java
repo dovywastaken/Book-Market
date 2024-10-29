@@ -125,7 +125,7 @@ public class bookController2 extends HttpServlet
 		//이동
 		 HttpSession session = req.getSession();
 		 session.setAttribute("booklist", list);
-		 //resp.sendRedirect("cart.jsp");
+		 resp.sendRedirect("books");
 		
 	}
 }

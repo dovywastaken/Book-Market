@@ -10,14 +10,23 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/order")
+@WebServlet("/cart")
 public class addCart_controller extends HttpServlet
 {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
 	{
-		req.getRequestDispatcher("shippingInfo.jsp").forward(req, resp);
+		System.out.println("book페이지에서 장바구니 버튼 눌려서 doGet 메서드로 장바구니 페이지로 들어옴");
+		Cookie[] cookies = req.getCookies();
+		for(int i=0; i<cookies.length; i++)
+		{
+			System.out.println("설정된 쿠키의 속성 이름 [ " + i + " ] : " + cookies[i].getName() + "<br>");
+			System.out.println("설정된 쿠키의 속성 값 [ " + i + " ] : " + cookies[i].getValue() + "<br>");
+			System.out.println("======================================= <br>");
+		}
+		
+		req.getRequestDispatcher("cart.jsp").forward(req, resp);
 	}
 
 	@Override
